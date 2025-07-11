@@ -1,7 +1,7 @@
 # Env
 
 - [] Docker-compose Nginx
-- [] Docker-compose Postgress
+- [x] Docker-compose Postgress
 
 # User
 
