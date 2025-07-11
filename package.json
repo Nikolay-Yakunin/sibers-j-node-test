@@ -4,7 +4,9 @@
   "description": "Junior Test Task",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/Nikolay-Yakunin/sibers-j-node-test/issues"
   },
-  "homepage": "https://github.com/Nikolay-Yakunin/sibers-j-node-test#readme"
+  "homepage": "https://github.com/Nikolay-Yakunin/sibers-j-node-test#readme",
+  "devDependencies": {
+    "@jest/globals": "^30.0.4",
+    "jest": "^30.0.4"
+  }
 }

@@ -227,12 +227,17 @@ class User {
 function NewUser(username, password, first_name, last_name, gender, birthdate) {
   const user = new User
   
-  user.setUserName(username)
-  user.setPassword(password)
-  user.setFirstName(first_name)
-  user.setLastName(last_name)
-  user.setGender(gender)
-  user.setBirthdate(birthdate)
-
-  return user
+  try {
+    user.setUserName(username)
+    user.setPassword(password)
+    user.setFirstName(first_name)
+    user.setLastName(last_name)
+    user.setGender(gender)
+    user.setBirthdate(birthdate)
+    return user
+  } catch (error) {
+    throw error
+  }
 }
+
+module.exports = NewUser;
