@@ -292,7 +292,7 @@ describe("NewUser", () => {
       }).toThrow(new Error("Invalid value: username must contain at least one letter"));
     });
   })
-  /* ------------- Invalid Data -------------*/
+  /* ------------- Edge cases -------------*/
    describe("Edge cases", () => {
     test("Edge case: Exactly 3 characters with letter", () => {
       const user = new NewUser(
