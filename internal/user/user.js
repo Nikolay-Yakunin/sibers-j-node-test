@@ -157,7 +157,7 @@ class User {
    * @param {string|Date} birthdate Date of birth (age must be 6-130 years)
    */
   setBirthdate(birthdate) {
-    if (typeof(birthdate) != 'string' || typeof(birthdate) != 'object') {
+    if (typeof(birthdate) != 'string' & typeof(birthdate) != 'object') {
       throw new TypeError(`Invalid type: Expected type string or Date, got a ${typeof(birthdate)}`)
     }
     if (typeof(birthdate) === 'object') {
@@ -174,7 +174,7 @@ class User {
         throw new Error("Invalid value: Failed parse string")
       }
 
-      birthdate = temp
+      birthdate = new Date(temp)
     }
     // "User" implies a living person. Therefore, there must be an age check.
     // How minus birtdate cant be more that 130 years
@@ -188,11 +188,11 @@ class User {
     }
 
     // Only date, not time 
-    this.birthdate = new birthdate.toISOString().split('T')[0]
+    this.birthdate = birthdate.toISOString().split('T')[0]
   }
 
   // help
-  static validatePassword(password) {
+  validatePassword(password) {
     if (!/[a-z]/.test(password)) {
         throw new Error("Invalid value: Password must contain at least one lowercase letter");
     }
