@@ -161,7 +161,7 @@ class User {
    */
   setBirthdate(birthdate) {
     if (typeof birthdate !== 'string' && !(birthdate instanceof Date)) {
-      throw new TypeError(`Invalid type: Expected type string or Date, got ${typeof birthdate}`);
+      throw new TypeError(`Invalid type: Expected type string or Date, got a ${typeof birthdate}`);
     }
 
     let parsedDate;
@@ -171,6 +171,13 @@ class User {
         throw new Error("Invalid value: Empty string");
       }
 
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
+        throw new Error("Invalid value: Invalid format, use ISO");
+      }
+      // if just Date(str), retun be a string and we missing range out
+      // because 
+      // d = Date("2003-100-1000") just adding out of range time
+      // "Sat Jul 12 2025 17:17:03 GMT+0700 (GMT+07:00)"  
       parsedDate = new Date(birthdate);
 
       if (isNaN(parsedDate.getTime())) {

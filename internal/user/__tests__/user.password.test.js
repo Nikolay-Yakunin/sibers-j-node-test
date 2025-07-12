@@ -7,7 +7,7 @@ const normal = {
   fname: "ДжонJosh",
   lname: "ДжоновJoshv",
   gender: "male",
-  birthdate: "01.01.2000"
+  birthdate: "2000-10-10"
 }
 
 

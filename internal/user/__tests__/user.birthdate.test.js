@@ -9,48 +9,37 @@ const normal = {
   gender: "male",
   birthdate: "2000-10-10"
 }
+
 describe("NewUser", () => {
   /* ------------- Valid Values -------------*/
-  describe("Gender: Valid Values", () => {
-    test("Valid data: male", () => {
+  describe("Birthdate: Valid Values", () => {
+    test("Valid data: String 2004-03-10", () => {
       expect(NewUser(
         normal.username,
         normal.password,
         normal.fname,
         normal.lname,
         normal.gender,
-        normal.birthdate
-      ).getGender()).toBe(
-        "male"
+        "2004-03-10"
+      ).getBrithdate()).toBe(
+        "2004-03-10"
       )
     });
-    test("Valid data: female", () => {
+    test("Valid data: Date 2004-03-10", () => {
       expect(NewUser(
         normal.username,
         normal.password,
         normal.fname,
         normal.lname,
-        "female",
-        normal.birthdate
-      ).getGender()).toBe(
-        "female"
-      )
-    });
-    test("Valid data: other", () => {
-      expect(NewUser(
-        normal.username,
-        normal.password,
-        normal.fname,
-        normal.lname,
-        "other",
-        normal.birthdate
-      ).getGender()).toBe(
-        "other"
+        normal.gender,
+        new Date("2004-03-10")
+      ).getBrithdate()).toBe(
+        "2004-03-10"
       )
     });
   });
   /* ------------- Invalid Types -------------*/
-  describe("Gender: Invalid Types", () => {
+  describe("Brithdate: Invalid Types", () => {
     test("Invalid type: Number", () => {
       expect(() => {
         new NewUser(
@@ -58,10 +47,10 @@ describe("NewUser", () => {
           normal.password,
           normal.fname,
           normal.lname,
-          123,
-          normal.birthdate
+          normal.gender,
+          123
         );
-      }).toThrow(new TypeError("Invalid type: Expected type string, got a number"));
+      }).toThrow(new TypeError("Invalid type: Expected type string or Date, got a number"));
     });
 
     test("Invalid type: Boolean", () => {
@@ -71,10 +60,10 @@ describe("NewUser", () => {
           normal.password,
           normal.fname,
           normal.lname,
-          true,
-          normal.birthdate
+          normal.gender,
+          true
         );
-      }).toThrow(new TypeError("Invalid type: Expected type string, got a boolean"));
+      }).toThrow(new TypeError("Invalid type: Expected type string or Date, got a boolean"));
     });
 
     test("Invalid type: Object", () => {
@@ -84,10 +73,10 @@ describe("NewUser", () => {
           normal.password,
           normal.fname,
           normal.lname,
-          {},
-          normal.birthdate
+          normal.gender,
+          {}
         );
-      }).toThrow(new TypeError("Invalid type: Expected type string, got a object"));
+      }).toThrow(new TypeError("Invalid type: Expected type string or Date, got a object"));
     });
 
     test("Invalid type: Null", () => {
@@ -97,10 +86,10 @@ describe("NewUser", () => {
           normal.password,
           normal.fname,
           normal.lname,
-          null,
-          normal.birthdate
+          normal.gender,
+          null
         );
-      }).toThrow(new TypeError("Invalid type: Expected type string, got a object"));
+      }).toThrow(new TypeError("Invalid type: Expected type string or Date, got a object"));
     });
 
     test("Invalid type: Undefined", () => {
@@ -110,37 +99,28 @@ describe("NewUser", () => {
           normal.password,
           normal.fname,
           normal.lname,
+          normal.gender,
           undefined,
-          normal.birthdate
         );
-      }).toThrow(new TypeError("Invalid type: Expected type string, got a undefined"));
+      }).toThrow(new TypeError("Invalid type: Expected type string or Date, got a undefined"));
     });
   })
   /* ------------- Invalid Values -------------*/
-  describe("Gender: Invalid value", () => {
-    test("Invalid value: Empty string", () => {
+  describe("Brithdate: Invalid Values", () => {
+    test("Invalid Value: Not ISO format", () => {
       expect(() => {
         new NewUser(
           normal.username,
           normal.password,
           normal.fname,
           normal.lname,
-          "",
-          normal.birthdate
+          normal.gender,
+          "10.04.2004"
         );
-      }).toThrow(new Error("Invalid value: Empty string"))
+      }).toThrow(new Error("Invalid value: Invalid format, use ISO"));
     });
-    test("Invalid value: Not a male || female || other", () => {
-      expect(() => {
-        new NewUser(
-          normal.username,
-          normal.password,
-          normal.fname,
-          normal.lname,
-          "cat",
-          normal.birthdate
-        );
-      }).toThrow(new Error("Invalid value: must be male or female or other"))
-    });
+
+
   });
-});
+
+})
