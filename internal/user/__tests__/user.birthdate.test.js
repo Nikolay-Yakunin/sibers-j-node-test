@@ -119,8 +119,44 @@ describe("NewUser", () => {
         );
       }).toThrow(new Error("Invalid value: Invalid format, use ISO"));
     });
-
-
+    test("Invalid Value: Not ISO format", () => {
+      expect(() => {
+        new NewUser(
+          normal.username,
+          normal.password,
+          normal.fname,
+          normal.lname,
+          normal.gender,
+          "2004-40-40"
+        );
+      }).toThrow(new Error("Invalid value: Failed to parse string"));
+    });
   });
-
+  /* ------------- Edge cases -------------*/
+  describe("Brithdate: Many thah Max age", () => {
+    test("Invalid Value: Not ISO format", () => {
+      expect(() => {
+        new NewUser(
+          normal.username,
+          normal.password,
+          normal.fname,
+          normal.lname,
+          normal.gender,
+          "1894-01-01"
+        );
+      }).toThrow(new Error("Invalid value: Age cannot be more than 130 years"));
+    });
+    test("Invalid Value: Less thah Min age", () => {
+      expect(() => {
+        new NewUser(
+          normal.username,
+          normal.password,
+          normal.fname,
+          normal.lname,
+          normal.gender,
+          "2020-01-01"
+        );
+      }).toThrow(new Error("Invalid value: Age cannot be less than 6 years"));
+    });
+  });
 })
