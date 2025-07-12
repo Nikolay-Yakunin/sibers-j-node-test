@@ -1,6 +1,6 @@
 
 const { Sequelize } = require('sequelize');
-require('dotenv').config();
+// require('dotenv').config();
 
 
 // Install the appropriate database driver:
@@ -11,11 +11,13 @@ require('dotenv').config();
 // npm install --save sqlite3
 // npm install --save tedious # Microsoft SQL Server
 // npm install --save oracledb # Oracle Database
-const dbUrl = process.env.DB_URL || "postgres://user:pass@postgres:5432/admin_dashboard";
+// const dbUrl = process.env.DB_URL || "postgres://user:pass@postgres:5432/admin_dashboard";
 
 
-const sequelize = new Sequelize(dbUrl, {
-  logging: console.log // maybe wll Winston
-})
+function NewSequelize(dbUrl) {
+  return new Sequelize(dbUrl, {
+    logging: false // maybe wll Winston
+  })
+}
 
-module.exports = sequelize
+module.exports = NewSequelize

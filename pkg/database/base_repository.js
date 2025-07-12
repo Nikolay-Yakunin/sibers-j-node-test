@@ -1,5 +1,3 @@
-const { Model } = require("sequelize");
-
 /**
  * Class BaseRepository
  * 
@@ -8,9 +6,6 @@ const { Model } = require("sequelize");
 class BaseRepository {
   constructor(model) {
     // I don't think this class needs a generator.
-    if (!(model instanceof Model)) {
-      throw new TypeError(`Invalid type: Expected sequelize.Model, got a ${typeof(model)}`)
-    }
     this.model = model
   }
 
