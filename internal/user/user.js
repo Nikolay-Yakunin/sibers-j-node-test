@@ -62,6 +62,9 @@ class User {
     if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
         throw new Error("Invalid value: username can only contain letters, numbers, underscore and dash");
     }
+    if (!/[a-zA-Z]/.test(name)) {
+      throw new Error("Invalid value: username must contain at least one letter")
+    }
 
     this.username = name
   }
