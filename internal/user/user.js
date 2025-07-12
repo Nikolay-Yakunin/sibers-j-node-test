@@ -47,20 +47,20 @@ class User {
    * @param {string} name Can only contain: letters, numbers and - _ Length 3-39
    */
   setUserName(name) {
-    if (typeof(name) != 'string') {
-      throw new TypeError(`Invalid type: Expected type string, got a ${typeof(name)}`)
+    if (typeof (name) != 'string') {
+      throw new TypeError(`Invalid type: Expected type string, got a ${typeof (name)}`)
     }
     if (name == "") {
       throw new Error("Invalid value: Empty string")
     }
     if (name.length < 3) {
-        throw new Error("Invalid value: username must be at least 3 characters");
+      throw new Error("Invalid value: username must be at least 3 characters");
     }
     if (name.length > 39) {
-        throw new Error("Invalid value: username must be less than 40 characters");
+      throw new Error("Invalid value: username must be less than 40 characters");
     }
     if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-        throw new Error("Invalid value: username can only contain letters, numbers, underscore and dash");
+      throw new Error("Invalid value: username can only contain letters, numbers, underscore and dash");
     }
     if (!/[a-zA-Z]/.test(name)) {
       throw new Error("Invalid value: username must contain at least one letter")
@@ -72,8 +72,8 @@ class User {
    * @param {string} password Must contain: hier/lover letters, numbers and special characters. Length 12-128
    */
   setPassword(password) {
-    if (typeof(password) != 'string') {
-      throw new TypeError(`Invalid type: Expected type string, got a ${typeof(password)}`)
+    if (typeof (password) != 'string') {
+      throw new TypeError(`Invalid type: Expected type string, got a ${typeof (password)}`)
     }
     if (password == "") {
       throw new Error("Invalid value: Empty string")
@@ -82,9 +82,9 @@ class User {
       throw new Error("Invalid value: Min length is 12")
     }
     if (password.length > 50) {
-        throw new Error("Invalid value: Max length is 50");
+      throw new Error("Invalid value: Max length is 50");
     }
-    
+
     this.validatePassword(password)
 
     this.password = password
@@ -93,8 +93,8 @@ class User {
    * @param {string} fname Can only contain: letters, spaces, and apostrophes. Length 2-50
    */
   setFirstName(fname) {
-    if (typeof(fname) != 'string') {
-      throw new TypeError(`Invalid type: Expected type string, got a ${typeof(fname)}`)
+    if (typeof (fname) != 'string') {
+      throw new TypeError(`Invalid type: Expected type string, got a ${typeof (fname)}`)
     }
 
     fname = fname.trim();
@@ -102,16 +102,16 @@ class User {
       throw new Error("Invalid value: Empty string")
     }
     if (fname.length < 2) {
-        throw new Error("Invalid value: Name must be at least 2 characters");
+      throw new Error("Invalid value: Name must be at least 2 characters");
     }
     if (fname.length > 50) {
-        throw new Error("Invalid value: Name must be less than 50 characters");
+      throw new Error("Invalid value: Name must be less than 50 characters");
     }
     if (!/^[a-zA-ZА-Яа-яёЁ\s\']+$/.test(fname)) {
-        throw new Error("Invalid value: Name can only contain letters, spaces, and apostrophes");
+      throw new Error("Invalid value: Name can only contain letters, spaces, and apostrophes");
     }
     if (/^[']|[']$/.test(fname)) {
-        throw new Error("Invalid value: Name cannot start or end with apostrophe");
+      throw new Error("Invalid value: Name cannot start or end with apostrophe");
     }
 
     this.first_name = fname
@@ -120,24 +120,24 @@ class User {
    * @param {string} lname Can only contain: letters, spaces, and apostrophes. Length 2-50
    */
   setLastName(lname) {
-    if (typeof(lname) != 'string') {
-      throw new TypeError(`Invalid type: Expected type string, got a ${typeof(lname)}`)
+    if (typeof (lname) != 'string') {
+      throw new TypeError(`Invalid type: Expected type string, got a ${typeof (lname)}`)
     }
     lname = lname.trim();
     if (lname == "") {
       throw new Error("Invalid value: Empty string")
     }
     if (lname.length < 2) {
-        throw new Error("Invalid value: Name must be at least 2 characters");
+      throw new Error("Invalid value: Name must be at least 2 characters");
     }
     if (lname.length > 50) {
-        throw new Error("Invalid value: Name must be less than 50 characters");
+      throw new Error("Invalid value: Name must be less than 50 characters");
     }
     if (!/^[a-zA-ZА-Яа-яёЁ\s\']+$/.test(lname)) {
-        throw new Error("Invalid value: Name can only contain letters, spaces, and apostrophes");
+      throw new Error("Invalid value: Name can only contain letters, spaces, and apostrophes");
     }
     if (/^[']|[']$/.test(lname)) {
-        throw new Error("Invalid value: Name cannot start or end with apostrophe");
+      throw new Error("Invalid value: Name cannot start or end with apostrophe");
     }
     this.last_name = lname
   }
@@ -145,8 +145,8 @@ class User {
    * @param {string} gender must be: male || female || other
    */
   setGender(gender) {
-    if (typeof(gender) != 'string') {
-      throw new TypeError(`Invalid type: Expected type string, got a ${typeof(gender)}`)
+    if (typeof (gender) != 'string') {
+      throw new TypeError(`Invalid type: Expected type string, got a ${typeof (gender)}`)
     }
     if (gender == "") {
       throw new Error("Invalid value: Empty string")
@@ -156,66 +156,70 @@ class User {
     }
     this.gender = gender
   }
-  /**
+  /** !!! Use ISO format !!!
    * @param {string|Date} birthdate Date of birth (age must be 6-130 years)
    */
   setBirthdate(birthdate) {
-    if (typeof(birthdate) != 'string' & typeof(birthdate) != 'object') {
-      throw new TypeError(`Invalid type: Expected type string or Date, got a ${typeof(birthdate)}`)
+    if (typeof birthdate !== 'string' && !(birthdate instanceof Date)) {
+      throw new TypeError(`Invalid type: Expected type string or Date, got ${typeof birthdate}`);
     }
-    if (typeof(birthdate) === 'object') {
-      if (birthdate.constructor.name != "Date") {
-        throw new TypeError(`Invalid type: Expected type object Date, got a ${birthdate.constructor.name}`)
-      }
-    }
-    if (typeof(birthdate) === 'string') {
-      if (birthdate == "") {
-        throw new Error("Invalid value: Empty string")
-      }
-      temp = Date.parse(birthdate)
-      if (isNaN(temp)) {
-        throw new Error("Invalid value: Failed parse string")
+
+    let parsedDate;
+
+    if (typeof birthdate === 'string') {
+      if (birthdate.trim() === "") {
+        throw new Error("Invalid value: Empty string");
       }
 
-      birthdate = new Date(temp)
+      parsedDate = new Date(birthdate);
+
+      if (isNaN(parsedDate.getTime())) {
+        throw new Error("Invalid value: Failed to parse string");
+      }
+    } else {
+      parsedDate = birthdate;
     }
+
+    const now = new Date();
+    const age = now.getFullYear() - parsedDate.getFullYear();
+
     // "User" implies a living person. Therefore, there must be an age check.
     // How minus birtdate cant be more that 130 years
-    if (new Date().getFullYear() - birthdate.getFullYear() > 130) {
+    if (age > 130) {
       throw new Error("Invalid value: Age cannot be more than 130 years");
     }
 
     // 6+ content)))
-    if (new Date().getFullYear() - birthdate.getFullYear() < 6) {
+    if (age < 6) {
       throw new Error("Invalid value: Age cannot be less than 6 years");
     }
 
     // Only date, not time 
-    this.birthdate = birthdate.toISOString().split('T')[0]
+    this.birthdate = parsedDate.toISOString().split('T')[0]
   }
 
   // help
   validatePassword(password) {
     if (!/[a-z]/.test(password)) {
-        throw new Error("Invalid value: Password must contain at least one lowercase letter");
+      throw new Error("Invalid value: Password must contain at least one lowercase letter");
     }
-    
+
     if (!/[A-Z]/.test(password)) {
-        throw new Error("Invalid value: Password must contain at least one uppercase letter");
+      throw new Error("Invalid value: Password must contain at least one uppercase letter");
     }
-    
+
     if (!/[0-9]/.test(password)) {
-        throw new Error("Invalid value: Password must contain at least one number");
+      throw new Error("Invalid value: Password must contain at least one number");
     }
-    
+
     if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?/\t\`]/.test(password)) {
-        throw new Error("Invalid value: Password must contain at least one special character");
+      throw new Error("Invalid value: Password must contain at least one special character");
     }
     // How can a user remember the unicode for an emoticon or 
     // something else like this? 
     // Therefore, it is worth validating the character set.
     if (!/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?/\t\`]+$/.test(password)) {
-        throw new Error("Invalid value: Password contains invalid characters");
+      throw new Error("Invalid value: Password contains invalid characters");
     }
   }
 }
@@ -231,7 +235,7 @@ class User {
  */
 function NewUser(username, password, first_name, last_name, gender, birthdate) {
   const user = new User
-  
+
   try {
     user.setUserName(username)
     user.setPassword(password)
