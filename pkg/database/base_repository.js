@@ -1,3 +1,5 @@
+const { Model } = require("sequelize");
+
 /**
  * Class BaseRepository
  * 
@@ -5,6 +7,10 @@
  */
 class BaseRepository {
   constructor(model) {
+    // I don't think this class needs a generator.
+    if (!(model instanceof Model)) {
+      throw new TypeError("Invalid Type: expected sequelize.Model, got a", typeof model)
+    }
     this.model = model
   }
 
@@ -71,3 +77,5 @@ class BaseRepository {
     }
   }
 }
+
+module.exports = BaseRepository
