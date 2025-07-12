@@ -161,6 +161,26 @@ describe("NewUser", () => {
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name can only contain letters, spaces, and apostrophes"));
     });
+    test("Invalid Values: Contains apostrof on start", () => {
+      expect(() => NewUser(
+        normal.username,
+        normal.password,
+        "'j",
+        normal.lname,
+        normal.gender,
+        normal.birthdate
+      )).toThrow(new Error("Invalid value: Name cannot start or end with apostrophe"));
+    });
+    test("Invalid Values: Contains apostrof on end", () => {
+      expect(() => NewUser(
+        normal.username,
+        normal.password,
+        "j'",
+        normal.lname,
+        normal.gender,
+        normal.birthdate
+      )).toThrow(new Error("Invalid value: Name cannot start or end with apostrophe"));
+    });
   })
   /* ------------- Edge Cases -------------*/
   describe("FirstName: Edge Cases", () => {
