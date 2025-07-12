@@ -12,7 +12,8 @@ const normal = {
 
 
 describe("NewUser", () => {
-  describe("Password: Valid Data", () => {
+  /* ------------- Valid Values -------------*/
+  describe("Password: Valid Values", () => {
     test("Valid data: Password Min Length", () => {
       expect(NewUser(
         normal.username,
@@ -106,7 +107,7 @@ describe("NewUser", () => {
       }).toThrow(new TypeError("Invalid type: Expected type string, got a undefined"));
     });
   })
-  /* ------------- Invalid Types -------------*/
+  /* ------------- Invalid Values -------------*/
   describe("Password: Invalid value", () => {
     test("Invalid value: Empty string", () => {
       expect(() => {
