@@ -107,6 +107,18 @@ describe("NewUser", () => {
   })
   /* ------------- Invalid Values -------------*/
   describe("Brithdate: Invalid Values", () => {
+    test("Invalid Value: Empty string", () => {
+      expect(() => {
+        new NewUser(
+          normal.username,
+          normal.password,
+          normal.fname,
+          normal.lname,
+          normal.gender,
+          ""
+        );
+      }).toThrow(new Error("Invalid value: Empty string"));
+    });
     test("Invalid Value: Not ISO format", () => {
       expect(() => {
         new NewUser(
@@ -134,7 +146,7 @@ describe("NewUser", () => {
   });
   /* ------------- Edge cases -------------*/
   describe("Brithdate: Many thah Max age", () => {
-    test("Invalid Value: Not ISO format", () => {
+    test("Invalid Value: More that Max age", () => {
       expect(() => {
         new NewUser(
           normal.username,
@@ -155,6 +167,30 @@ describe("NewUser", () => {
           normal.lname,
           normal.gender,
           "2020-01-01"
+        );
+      }).toThrow(new Error("Invalid value: Age cannot be less than 6 years"));
+    });
+    test("Invalid Value: Date More that Max Age", () => {
+      expect(() => {
+        new NewUser(
+          normal.username,
+          normal.password,
+          normal.fname,
+          normal.lname,
+          normal.gender,
+          new Date("1894-01-01")
+        );
+      }).toThrow(new Error("Invalid value: Age cannot be more than 130 years"));
+    });
+    test("Invalid Value: Date Less thah Min age", () => {
+      expect(() => {
+        new NewUser(
+          normal.username,
+          normal.password,
+          normal.fname,
+          normal.lname,
+          normal.gender,
+          new Date("2020-01-01")
         );
       }).toThrow(new Error("Invalid value: Age cannot be less than 6 years"));
     });
