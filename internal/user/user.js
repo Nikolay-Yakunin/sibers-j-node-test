@@ -81,8 +81,8 @@ class User {
     if (password.length < 12) {
       throw new Error("Invalid value: Min length is 12")
     }
-    if (password.length > 128) {
-        throw new Error("Invalid value: Max length is 128");
+    if (password.length > 50) {
+        throw new Error("Invalid value: Max length is 50");
     }
     
     this.validatePassword(password)
@@ -208,11 +208,13 @@ class User {
         throw new Error("Invalid value: Password must contain at least one number");
     }
     
-    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?]/.test(password)) {
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?/\t\`]/.test(password)) {
         throw new Error("Invalid value: Password must contain at least one special character");
     }
-    
-    if (!/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?]+$/.test(password)) {
+    // How can a user remember the unicode for an emoticon or 
+    // something else like this? 
+    // Therefore, it is worth validating the character set.
+    if (!/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?/\t\`]+$/.test(password)) {
         throw new Error("Invalid value: Password contains invalid characters");
     }
   }
