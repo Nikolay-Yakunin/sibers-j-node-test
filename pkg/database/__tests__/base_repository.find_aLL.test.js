@@ -67,7 +67,7 @@ describe('BaseRepository', () => {
     });
 
     test('rerutn oly one', async () => {
-      const found = await repo.findAll({ limit: 1,raw: true });
+      const found = await repo.findAll({ limit: 1, raw: true });
 
       const expectedUsernames = [createdUser1.username];
       const actualUsernames = found.rows.map(u => u.username);
@@ -76,7 +76,7 @@ describe('BaseRepository', () => {
     });
 
     test('rerutns start 1', async () => {
-      const found = await repo.findAll({ offset: 1,raw: true });
+      const found = await repo.findAll({ offset: 1, raw: true });
 
       const expectedUsernames = [createdUser2.username];
       const actualUsernames = found.rows.map(u => u.username);
@@ -85,15 +85,13 @@ describe('BaseRepository', () => {
     });
 
     test('rerutns where usrname "find_all_test_user2"', async () => {
-      const found = await repo.findAll({ where: {username:'find_all_test_user2'},raw: true });
+      const found = await repo.findAll({ where: { username: 'find_all_test_user2' }, raw: true });
 
       const expectedUsernames = [createdUser2.username];
       const actualUsernames = found.rows.map(u => u.username);
 
       expect(actualUsernames.sort()).toEqual(expectedUsernames.sort());
     });
-
-    
 
     test('returns plain object (not Sequelize instance)', async () => {
       const found = await repo.findAll();
