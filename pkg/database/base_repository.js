@@ -54,7 +54,7 @@ class BaseRepository {
     });
 
     if (count === 0) {
-      throw new Error(`Record with ID=${id} not found`);
+      throw new Error(`Record with ID=${id} not found or field not exist`);
     }
 
     // returning: true
