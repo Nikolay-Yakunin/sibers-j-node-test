@@ -5,14 +5,15 @@
 
 # User
 
-- [] CRUD repo
+- [x] CRUD repo
+- [x] Repo tests
 
 - [] Service model
 - [] Service Tests
 - [] Service implementation
 
 - [] Handlers model
-- [] Handlers test
+- [] Handlers tests
 - [] handlers implementation
 
 - [] Docekerfile/Docker-compose User-service

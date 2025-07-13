@@ -49,6 +49,9 @@ class UserRepository extends BaseRepository {
   }
 
   async deleteUser(id) {
+    if (typeof(id) != 'number') {
+      throw new TypeError(`Invalid type: expected id=number, got a ${typeof id}`)
+    }
     return await this.delete(id)
   }
 

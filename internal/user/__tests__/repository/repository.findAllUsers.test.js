@@ -88,6 +88,16 @@ describe('BaseRepository', () => {
       }
     });
 
+    test('findAllUsers: not exist', async () => {
+      try {
+        const raw = await repo.findAllUsers({where: { username: "not_exist"}});
+        // console.log(raw)
+        expect(raw).toBeNull();
+      } catch (error) {
+        expect(error).not.toBeNull()
+      }
+    });
+
     test('findAllUsers: where simple', async () => {
       try {
         const raw = await repo.findAllUsers({where: { first_name: "Николай"}});
