@@ -1,4 +1,4 @@
-const { NewUser } = require('../user');
+const { NewUser } = require('../../user');
 const { describe, expect, test } = require('@jest/globals');
 
 const normal = {
@@ -12,65 +12,65 @@ const normal = {
 
 describe("NewUser", () => {
   /* ------------- Valid Values -------------*/
-  describe("LastName: Valid Data", () => {
-    test("Valid data: LastName Min Length and latin", () => {
+  describe("FirstName: Valid Data", () => {
+    test("Valid data: FirstName Min Length and latin", () => {
       expect(NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "Jo",
+        normal.lname,
         normal.gender,
         normal.birthdate
-      ).getLastName()).toBe(
+      ).getFirstName()).toBe(
         "Jo"
       )
     });
-    test("Valid data: LastName Big Length and kirilic", () => {
+    test("Valid data: FirstName Big Length and kirilic", () => {
       expect(NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "Вольфшлегельштайнхаузенбергедорф",
+        normal.lname,
         normal.gender,
         normal.birthdate
-      ).getLastName()).toBe(
+      ).getFirstName()).toBe(
         "Вольфшлегельштайнхаузенбергедорф"
       )
     });
-    test("Valid data: LastName with apostrophes", () => {
+    test("Valid data: FirstName with apostrophes", () => {
       expect(NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "Вольфшлегельштайнхаузенбергедор'ф",
+        normal.lname,
         normal.gender,
         normal.birthdate
-      ).getLastName()).toBe(
+      ).getFirstName()).toBe(
         "Вольфшлегельштайнхаузенбергедор'ф"
       )
     });
-    test("Valid data: LastName with space", () => {
-      expect(NewUser(
+    test("Valid data: FirstName with space", () => {
+      expect( NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "Вольфшлегельштайнх аузенбергедор'ф",
+        normal.lname,
         normal.gender,
         normal.birthdate
-      ).getLastName()).toBe(
+      ).getFirstName()).toBe(
         "Вольфшлегельштайнх аузенбергедор'ф"
       )
     });
   })
   /* ------------- Inalid Types -------------*/
-  describe("LastName: Invalid Data", () => {
+  describe("FirstName: Invalid Data", () => {
     test("Invalid type: Number", () => {
       expect(() => {
         new NewUser(
           normal.username,
           normal.password,
-          normal.fname,
           123,
+          normal.lname,
           normal.gender,
           normal.birthdate
         );
@@ -82,8 +82,8 @@ describe("NewUser", () => {
         new NewUser(
           normal.username,
           normal.password,
-          normal.fname,
           true,
+          normal.lname,
           normal.gender,
           normal.birthdate
         );
@@ -95,8 +95,8 @@ describe("NewUser", () => {
         new NewUser(
           normal.username,
           normal.password,
-          normal.fname,
           {},
+          normal.lname,
           normal.gender,
           normal.birthdate
         );
@@ -108,8 +108,8 @@ describe("NewUser", () => {
         new NewUser(
           normal.username,
           normal.password,
-          normal.fname,
           null,
+          normal.lname,
           normal.gender,
           normal.birthdate
         );
@@ -121,8 +121,8 @@ describe("NewUser", () => {
         new NewUser(
           normal.username,
           normal.password,
-          normal.fname,
           undefined,
+          normal.lname,
           normal.gender,
           normal.birthdate
         );
@@ -130,13 +130,13 @@ describe("NewUser", () => {
     });
   })
   /* ------------- Inalid Values -------------*/
-  describe("LastName: Invalid Values", () => {
+  describe("FirstName: Invalid Values", () => {
     test("Invalid Values: Empty string", () => {
       expect(() => new NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "",
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Empty string"));
@@ -145,8 +145,8 @@ describe("NewUser", () => {
       expect(() => new NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "Jo1",
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name can only contain letters, spaces, and apostrophes"));
@@ -155,8 +155,8 @@ describe("NewUser", () => {
       expect(() => NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "Jo!🤔",
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name can only contain letters, spaces, and apostrophes"));
@@ -165,8 +165,8 @@ describe("NewUser", () => {
       expect(() => NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "'j",
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name cannot start or end with apostrophe"));
@@ -175,31 +175,31 @@ describe("NewUser", () => {
       expect(() => NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "j'",
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name cannot start or end with apostrophe"));
     });
   })
   /* ------------- Edge Cases -------------*/
-  describe("LastName: Edge Cases", () => {
-    test("Edge Cases: LastName less that Min Length", () => {
+  describe("FirstName: Edge Cases", () => {
+    test("Edge Cases: FirstName less that Min Length", () => {
       expect(() => NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "J",
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name must be at least 2 characters"))
     });
-    test("Edge Cases: LastName more that Max Length", () => {
+    test("Edge Cases: FirstName more that Max Length", () => {
       expect(() => NewUser(
         normal.username,
         normal.password,
-        normal.fname,
         "J".repeat(51),
+        normal.lname,
         normal.gender,
         normal.birthdate
       )).toThrow(new Error("Invalid value: Name must be less than 50 characters"))

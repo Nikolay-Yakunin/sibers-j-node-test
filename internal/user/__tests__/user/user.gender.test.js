@@ -1,4 +1,4 @@
-const { NewUser } = require('../user');
+const { NewUser } = require('../../user');
 const { describe, expect, test } = require('@jest/globals');
 
 const normal = {
