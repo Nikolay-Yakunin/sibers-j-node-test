@@ -126,7 +126,7 @@ describe('BaseRepository', () => {
         expect(raw.rows[0].first_name).toBe("Николай")
         // console.log(raw)
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         expect(error).toBeNull()
       }
     });
@@ -135,7 +135,7 @@ describe('BaseRepository', () => {
       try {
         await repo.createUser(user3, "hash")
         let raw = await repo.findAllUsers({ limit: 2, offset: 0, where: { first_name: "Николай"}});
-        console.log(raw)
+        // console.log(raw)
         expect(raw).not.toBeNull();
         expect(raw.count).toBe(3)
         expect(raw.rows.length).toBe(2)
@@ -148,7 +148,7 @@ describe('BaseRepository', () => {
         expect(raw.rows.length).toBe(1)
         expect(raw.rows[0].first_name).toBe("Николай")        
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         expect(error).toBeNull()
       }
     });
