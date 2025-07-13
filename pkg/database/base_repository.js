@@ -49,16 +49,17 @@ class BaseRepository {
   }
 
   async update(id, updates) {
-    const [count, [updated]] = await this.model.update(updates, {
+    const [count] = await this.model.update(updates, {
       where: { id },
-      returning: true,
     });
 
     if (count === 0) {
       throw new Error(`Record with ID=${id} not found`);
     }
-
-    return updated.toJSON();
+    
+    // returning: true
+    //  are not allowerd sqlite and more
+    return await this.findById(id);
   }
 
   async delete(id) {
