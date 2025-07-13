@@ -38,7 +38,7 @@ describe('BaseRepository', () => {
   beforeAll(async () => {
     repo = NewUserRepository(db);
     await db.sync({ force: true });
-    
+
   });
 
   // Close db | Like defer in Go
@@ -52,7 +52,7 @@ describe('BaseRepository', () => {
 
       let raw = await repo.updateUser(1, { first_name: "имя_upd" })
       // console.log(raw)
-      
+
       expect(raw).not.toBeNull()
       expect(raw.count).toBeUndefined()
       expect(raw.first_name).toBe("имя_upd")
@@ -64,7 +64,7 @@ describe('BaseRepository', () => {
 
         let raw = await repo.updateUser(2, { username: "user" })
         // console.log(raw)
-        
+
         expect(raw).toBeNull()
       } catch (error) {
         expect(error).not.toBeNull()
@@ -76,7 +76,7 @@ describe('BaseRepository', () => {
       try {
         let raw = await repo.updateUser(2, { username: "user1" })
         // console.log(raw)
-        
+
         expect(raw).not.toBeNull()
         expect(raw.username).toBe("user1")
       } catch (error) {
@@ -88,7 +88,7 @@ describe('BaseRepository', () => {
       try {
         let raw = await repo.updateUser("1", { username: "user1" })
         // console.log(raw)
-        
+
         expect(raw).toBeNull()
       } catch (error) {
         expect(error).not.toBeNull()
@@ -101,7 +101,7 @@ describe('BaseRepository', () => {
         // console.log(await repo.findAllUsers())
         await repo.updateUser(1, { kukoracha: "user1" })
         // console.log(raw)
-        
+
         expect(raw).toBeNull()
       } catch (error) {
         expect(error).not.toBeNull()

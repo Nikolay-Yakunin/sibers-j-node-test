@@ -50,7 +50,7 @@ describe("NewUser", () => {
       )
     });
     test("Valid data: FirstName with space", () => {
-      expect( NewUser(
+      expect(NewUser(
         normal.username,
         normal.password,
         "Вольфшлегельштайнх аузенбергедор'ф",

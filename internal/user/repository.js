@@ -9,7 +9,7 @@ class UserRepository extends BaseRepository {
       throw new TypeError("Invalid type: user must be User");
     }
 
-    if (typeof(passwordHash) != 'string') {
+    if (typeof (passwordHash) != 'string') {
       throw new TypeError(`Invalid type: expected string, got a ${typeof passwordHash}`)
     }
 
@@ -26,13 +26,13 @@ class UserRepository extends BaseRepository {
   }
 
   async findUserById(id) {
-    if (typeof(id) != 'number') {
+    if (typeof (id) != 'number') {
       throw new TypeError(`Invalid type: expected number, got a ${typeof id}`)
     }
 
     return await this.findById(id)
   }
-  
+
   // Bad practic, can't check type options
   async findAllUsers(options) {
     return await this.findAll(options)
@@ -40,16 +40,16 @@ class UserRepository extends BaseRepository {
 
   // Also can't check updates
   async updateUser(id, updates) {
-    if (typeof(id) != 'number') {
+    if (typeof (id) != 'number') {
       throw new TypeError(`Invalid type: expected id=number, got a ${typeof id}`)
     }
-    
+
 
     return await this.update(id, updates);
   }
 
   async deleteUser(id) {
-    if (typeof(id) != 'number') {
+    if (typeof (id) != 'number') {
       throw new TypeError(`Invalid type: expected id=number, got a ${typeof id}`)
     }
     return await this.delete(id)

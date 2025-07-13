@@ -1,4 +1,4 @@
-const { NewUser }= require('../../user');
+const { NewUser } = require('../../user');
 const { describe, expect, test } = require('@jest/globals');
 
 const normal = {
@@ -9,7 +9,6 @@ const normal = {
   gender: "male",
   birthdate: "2000-10-10"
 }
-
 
 describe("NewUser", () => {
   /* ------------- Valid Data -------------*/
@@ -293,7 +292,7 @@ describe("NewUser", () => {
     });
   })
   /* ------------- Edge cases -------------*/
-   describe("Edge cases", () => {
+  describe("Edge cases", () => {
     test("Edge case: Exactly 3 characters with letter", () => {
       const user = new NewUser(
         "a12",

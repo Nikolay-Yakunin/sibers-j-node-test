@@ -10,7 +10,6 @@ const normal = {
   birthdate: "2000-10-10"
 }
 
-
 describe("NewUser", () => {
   /* ------------- Valid Values -------------*/
   describe("Password: Valid Values", () => {

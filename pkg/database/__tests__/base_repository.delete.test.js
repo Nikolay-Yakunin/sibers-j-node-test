@@ -61,7 +61,7 @@ describe('BaseRepository', () => {
     test('delete normal', async () => {
       const found = await repo.delete(createdUser1.id);
 
-      const check = await repo.findAll({where: {username: createdUser1.username}})
+      const check = await repo.findAll({ where: { username: createdUser1.username } })
 
       expect(found).toBeNull;
       expect(check).toBeNull

@@ -9,6 +9,7 @@ const normal = {
   gender: "male",
   birthdate: "2000-10-10"
 }
+
 describe("NewUser", () => {
   /* ------------- Valid Values -------------*/
   describe("Gender: Valid Values", () => {

@@ -38,7 +38,7 @@ describe('BaseRepository', () => {
       const find = await repo.findUserById(1);
       expect(find).toBeNull()
     });
-    
+
     test('findUserById: exists', async () => {
       await repo.createUser(user, "hash")
       const find = await repo.findUserById(1);
@@ -46,7 +46,7 @@ describe('BaseRepository', () => {
         username: user.getUserName()
       })
     });
-    
+
     test('findUserById: invalid type', async () => {
       try {
         const find = await repo.findUserById("1");
