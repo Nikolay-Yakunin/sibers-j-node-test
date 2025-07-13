@@ -1,6 +1,6 @@
 const { BaseRepository } = require("../../pkg/database");
 const initUserModel = require("./model");
-const User = require("./user");
+const { User } = require("./user");
 
 
 class UserRepository extends BaseRepository {
@@ -46,6 +46,10 @@ class UserRepository extends BaseRepository {
     
 
     return await this.update(id, updates);
+  }
+
+  async deleteUser(id) {
+    return await this.delete(id)
   }
 
 }

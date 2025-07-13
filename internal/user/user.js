@@ -256,4 +256,4 @@ function NewUser(username, password, first_name, last_name, gender, birthdate) {
   }
 }
 
-module.exports = {User, NewUser};
+module.exports = { User, NewUser };
