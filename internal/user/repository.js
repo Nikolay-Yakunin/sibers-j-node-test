@@ -1,4 +1,4 @@
-const { BaseRepository } = require("../../pkg/database");
+const { BaseRepository } = require("../../pkg/database/base_repository");
 const initUserModel = require("./model");
 const { User } = require("./user");
 
@@ -30,7 +30,7 @@ class UserRepository extends BaseRepository {
       throw new TypeError(`Invalid type: expected number, got ${typeof id}`)
     }
 
-    return await this.findUserById(id)
+    return await this.findById(id)
   }
   
   // Bad practic, can't check type options
