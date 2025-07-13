@@ -48,12 +48,31 @@ describe('BaseRepository', () => {
       expect(raw.username).toBe('AaBbCcDdEeFfGgHhIiJjKkLlMmN1234567890-_');
     });
 
-    test('createUser: error', async () => {
+    test('createUser: error add the same twice', async () => {
       try {
         await repo.createUser(user, "hash");
         throw new Error("Expected error but got success");
       } catch (err) {
         expect(err.message).toMatch("Validation error");
+      }
+    });
+
+    test('createUser: error not user', async () => {
+      try {
+        await repo.createUser({}, "hash");
+        throw new Error("Expected error but got success");
+      } catch (err) {
+        expect(err.message).toMatch("Invalid type: user must be User");
+      }
+    });
+
+    test('createUser: error ', async () => {
+      try {
+        // Just dont initiate create
+        await repo.createUser(user, 123); // I dont wanna do this for all types
+        throw new Error("Expected error but got success");
+      } catch (err) {
+        expect(err.message).toMatch("Invalid type: expected string, got a number");
       }
     });
   })

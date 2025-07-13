@@ -10,7 +10,7 @@ class UserRepository extends BaseRepository {
     }
 
     if (typeof(passwordHash) != 'string') {
-      throw new TypeError(`Invalid type: expected string, got ${typeof passwordHash}`)
+      throw new TypeError(`Invalid type: expected string, got a ${typeof passwordHash}`)
     }
 
     const dto = {
@@ -27,7 +27,7 @@ class UserRepository extends BaseRepository {
 
   async findUserById(id) {
     if (typeof(id) != 'number') {
-      throw new TypeError(`Invalid type: expected number, got ${typeof id}`)
+      throw new TypeError(`Invalid type: expected number, got a ${typeof id}`)
     }
 
     return await this.findById(id)
@@ -41,7 +41,7 @@ class UserRepository extends BaseRepository {
   // Also can't check updates
   async updateUser(id, updates) {
     if (typeof(id) != 'number') {
-      throw new TypeError(`Invalid type: expected id=number, got ${typeof id}`)
+      throw new TypeError(`Invalid type: expected id=number, got a ${typeof id}`)
     }
     
 
