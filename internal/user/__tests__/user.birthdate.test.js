@@ -21,7 +21,7 @@ describe("NewUser", () => {
         normal.lname,
         normal.gender,
         "2004-03-10"
-      ).getBrithdate()).toBe(
+      ).getBirthdate()).toBe(
         "2004-03-10"
       )
     });
@@ -33,7 +33,7 @@ describe("NewUser", () => {
         normal.lname,
         normal.gender,
         new Date("2004-03-10")
-      ).getBrithdate()).toBe(
+      ).getBirthdate()).toBe(
         "2004-03-10"
       )
     });
@@ -117,7 +117,7 @@ describe("NewUser", () => {
           normal.gender,
           ""
         );
-      }).toThrow(new Error("Invalid value: Empty string"));
+      }).toThrow(new Error("Invalid value: Empty"));
     });
     test("Invalid Value: Not ISO format", () => {
       expect(() => {

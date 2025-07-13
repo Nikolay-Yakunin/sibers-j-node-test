@@ -38,7 +38,7 @@ class User {
     return this.gender
   }
 
-  getBrithdate() {
+  getBirthdate() {
     return this.birthdate
   }
 
@@ -256,4 +256,4 @@ function NewUser(username, password, first_name, last_name, gender, birthdate) {
   }
 }
 
-module.exports = NewUser;
+module.exports = User, NewUser;
