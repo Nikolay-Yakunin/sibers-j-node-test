@@ -1,4 +1,4 @@
-const NewUser = require('../user');
+const { NewUser } = require('../user');
 const { describe, expect, test } = require('@jest/globals');
 
 const normal = {
@@ -117,7 +117,7 @@ describe("NewUser", () => {
           normal.gender,
           ""
         );
-      }).toThrow(new Error("Invalid value: Empty"));
+      }).toThrow(new Error("Invalid value: Empty string"));
     });
     test("Invalid Value: Not ISO format", () => {
       expect(() => {

@@ -1,4 +1,4 @@
-const NewUser = require('../user');
+const { NewUser } = require('../user');
 const { describe, expect, test } = require('@jest/globals');
 
 const normal = {
@@ -50,7 +50,7 @@ describe("NewUser", () => {
       )
     });
     test("Valid data: FirstName with space", () => {
-      expect(NewUser(
+      expect( NewUser(
         normal.username,
         normal.password,
         "Вольфшлегельштайнх аузенбергедор'ф",

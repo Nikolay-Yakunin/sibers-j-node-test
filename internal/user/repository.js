@@ -4,25 +4,50 @@ const User = require("./user");
 
 
 class UserRepository extends BaseRepository {
-  async createUser(user) {
+  async createUser(user, passwordHash) {
     if (!(user instanceof User)) {
       throw new TypeError("Invalid type: user must be User");
     }
 
-    return await this.create(this.toDto(user));
+    if (typeof(passwordHash) != 'string') {
+      throw new TypeError(`Invalid type: expected string, got ${typeof passwordHash}`)
+    }
+
+    const dto = {
+      username: user.getUserName(),
+      password: passwordHash,
+      first_name: user.getFirstName(),
+      last_name: user.getLastName(),
+      gender: user.getGender(),
+      birthdate: user.getBirthdate()
+    };
+
+    return await this.create(dto);
   }
 
-  // decomposition
-  toDto(user) {
-  return {
-    username: user.getUserName(),
-    password: user.getPassword(),
-    first_name: user.getFirstName(),
-    last_name: user.getLastName(),
-    gender: user.getGender(),
-    birthdate: user.getBirthdate()
-  };
-}
+  async findUserById(id) {
+    if (typeof(id) != 'number') {
+      throw new TypeError(`Invalid type: expected number, got ${typeof id}`)
+    }
+
+    return await this.findUserById(id)
+  }
+  
+  // Bad practic, can't check type options
+  async findAllUsers(options) {
+    return await this.findAll(options)
+  }
+
+  // Also can't check updates
+  async updateUser(id, updates) {
+    if (typeof(id) != 'number') {
+      throw new TypeError(`Invalid type: expected id=number, got ${typeof id}`)
+    }
+    
+
+    return await this.update(id, updates);
+  }
+
 }
 
 function NewUserRepository(sequelize) {

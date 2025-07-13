@@ -1,4 +1,4 @@
-const NewUser = require('../user');
+const { NewUser }= require('../user');
 const { describe, expect, test } = require('@jest/globals');
 
 const normal = {
@@ -308,7 +308,7 @@ describe("NewUser", () => {
 
     test("Edge case: Exactly 39 characters", () => {
       const longName = "a" + "1".repeat(38); // 39 chars total
-      const user = new NewUser(
+      const user = NewUser(
         longName,
         normal.password,
         normal.fname,
@@ -320,7 +320,7 @@ describe("NewUser", () => {
     });
 
     test("Edge case: Single letter at start", () => {
-      const user = new NewUser(
+      const user = NewUser(
         "a__",
         normal.password,
         normal.fname,
@@ -332,7 +332,7 @@ describe("NewUser", () => {
     });
 
     test("Edge case: Single letter at end", () => {
-      const user = new NewUser(
+      const user = NewUser(
         "123a",
         normal.password,
         normal.fname,
@@ -344,7 +344,7 @@ describe("NewUser", () => {
     });
 
     test("Edge case: Single letter in middle", () => {
-      const user = new NewUser(
+      const user = NewUser(
         "12a34",
         normal.password,
         normal.fname,
