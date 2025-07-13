@@ -1,6 +1,6 @@
 const { describe, expect, test, beforeAll, afterAll } = require('@jest/globals');
 const { DataTypes, Model } = require('sequelize');
-const BaseRepository = require('../base_repository');
+const { BaseRepository } = require('../base_repository');
 const NewSequelize = require('../database');
 
 // Need npm install --save sqlite3
@@ -52,20 +52,20 @@ describe('BaseRepository', () => {
     await db.close();
   });
 
-  describe("create",() => {
+  describe("create", () => {
     test('create(): creates a new record and returns plain object', async () => {
-    const created = await repo.create(userData);
+      const created = await repo.create(userData);
 
-    expect(created).toEqual(
-      expect.objectContaining({
-        username: 'test_user',
-        password: 'hashed_password',
-      })
-    );
+      expect(created).toEqual(
+        expect.objectContaining({
+          username: 'test_user',
+          password: 'hashed_password',
+        })
+      );
 
-    const raw = await UserModel.findOne({ where: { username: 'test_user' } });
-    expect(raw).not.toBeNull();
-    expect(raw.username).toBe('test_user');
-  });
+      const raw = await UserModel.findOne({ where: { username: 'test_user' } });
+      expect(raw).not.toBeNull();
+      expect(raw.username).toBe('test_user');
+    });
   })
 });

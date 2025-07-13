@@ -1,6 +1,6 @@
 const { describe, expect, test, beforeAll, afterAll } = require('@jest/globals');
 const { DataTypes, Model } = require('sequelize');
-const BaseRepository = require('../base_repository');
+const { BaseRepository } = require('../base_repository');
 const NewSequelize = require('../database');
 
 // Need npm install --save sqlite3
