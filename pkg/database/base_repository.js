@@ -11,7 +11,7 @@ class BaseRepository {
 
   async create(data) {
     const created = await this.model.create(data);
-    return created.toJSON();
+    return created ? created.toJSON() : null;
   }
 
   async findById(id) {
@@ -56,7 +56,7 @@ class BaseRepository {
     if (count === 0) {
       throw new Error(`Record with ID=${id} not found`);
     }
-    
+
     // returning: true
     //  are not allowerd sqlite and more
     return await this.findById(id);

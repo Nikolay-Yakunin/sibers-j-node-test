@@ -33,7 +33,7 @@ describe('BaseRepository', () => {
   });
 
   describe("createUser", () => {
-    test('createUser: ', async () => {
+    test('createUser: normal', async () => {
       const created = await repo.createUser(user, "hash");
 
       expect(created).toEqual(
@@ -46,6 +46,15 @@ describe('BaseRepository', () => {
       const raw = await repo.findUserById(1);
       expect(raw).not.toBeNull();
       expect(raw.username).toBe('AaBbCcDdEeFfGgHhIiJjKkLlMmN1234567890-_');
+    });
+
+    test('createUser: error', async () => {
+      try {
+        await repo.createUser(user, "hash");
+        throw new Error("Expected error but got success");
+      } catch (err) {
+        expect(err.message).toMatch("Validation error");
+      }
     });
   })
 });
