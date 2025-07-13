@@ -11,7 +11,7 @@ class BaseRepository {
 
   async create(data) {
     const created = await this.model.create(data);
-    return created ? created.toJSON() : null;
+    return created.toJSON(); 
   }
 
   async findById(id) {
