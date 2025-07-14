@@ -29,7 +29,8 @@ class BaseRepository {
    * @param {Object} [options]
    * @param {number} [options.limit] how much
    * @param {number} [options.offset] start
-   * @param {Object} [options.where] filters, usaly like WHERE in sql 
+   * @param {Object} [options.where] filters, usaly like WHERE in sql
+   * @param {Array[[string, string]]} [options.order] [sortby, ASC or DESC]
    * 
    * @returns {Promise<{ rows: Object[], count: number }>}
    */
@@ -40,6 +41,7 @@ class BaseRepository {
       where,
       limit,
       offset,
+      order
     });
 
     return {
