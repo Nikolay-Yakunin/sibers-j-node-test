@@ -35,7 +35,7 @@ class BaseRepository {
    * @returns {Promise<{ rows: Object[], count: number }>}
    */
   async findAll(options = {}) {
-    const { limit, offset, where } = options;
+    const { limit, offset, where, order } = options;
 
     const result = await this.model.findAndCountAll({
       where,

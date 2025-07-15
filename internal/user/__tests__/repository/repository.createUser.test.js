@@ -1,6 +1,6 @@
 const { describe, expect, test, beforeAll, afterAll } = require('@jest/globals');
 const NewSequelize = require('../../../../pkg/database/database');
-const NewUserRepository = require('../../repository');
+const { NewUserRepository } = require('../../repository');
 const { NewUser } = require("../../user")
 
 const normal = [

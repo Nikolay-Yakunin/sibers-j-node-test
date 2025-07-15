@@ -1,6 +1,6 @@
 const { describe, expect, test, beforeAll, afterAll } = require('@jest/globals');
 const NewSequelize = require('../../../../pkg/database/database');
-const NewUserRepository = require('../../repository');
+const { NewUserRepository }  = require('../../repository');
 const { NewUser } = require("../../user")
 
 const normal = [
@@ -49,20 +49,25 @@ describe('BaseRepository', () => {
   describe("Update", () => {
     test('Update: normal', async () => {
       const created = await repo.createUser(user, "hash");
+      let useru = NewUser(...normal)
+      useru.setFirstName("имяup'd")
 
-      let raw = await repo.updateUser(1, { first_name: "имя_upd" })
+      let raw = await repo.updateUser(1, useru)
       // console.log(raw)
 
       expect(raw).not.toBeNull()
       expect(raw.count).toBeUndefined()
-      expect(raw.first_name).toBe("имя_upd")
+      expect(raw.first_name).toBe("имяup'd")
     });
 
     test('Update: not unicue', async () => {
       try {
         const created = await repo.createUser(user1, "hash");
 
-        let raw = await repo.updateUser(2, { username: "user" })
+        let useru = NewUser(...normal1)
+        useru.setUserName("user")
+
+        let raw = await repo.updateUser(2, useru)
         // console.log(raw)
 
         expect(raw).toBeNull()
@@ -72,9 +77,9 @@ describe('BaseRepository', () => {
       }
     });
 
-    test('Update: not unicue', async () => {
+    test('Update: change on the same', async () => {
       try {
-        let raw = await repo.updateUser(2, { username: "user1" })
+        let raw = await repo.updateUser(2, user1)
         // console.log(raw)
 
         expect(raw).not.toBeNull()
@@ -105,7 +110,7 @@ describe('BaseRepository', () => {
         expect(raw).toBeNull()
       } catch (error) {
         expect(error).not.toBeNull()
-        expect(error.message).toBe("Record with ID=1 not found or field not exist") // unexpected, but okey
+        expect(error.message).toBe("Invalid type: user must be User") // unexpected, but okey
       }
     });
   })
