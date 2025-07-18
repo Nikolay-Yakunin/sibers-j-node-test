@@ -33,28 +33,38 @@ class UserRepository extends BaseRepository {
     return await this.findById(id)
   }
 
+  async findUserByUsername(username) {
+    if (typeof username !== 'string') {
+      throw new TypeError('username must be a string');
+    }
+    const user = await this.model.findOne({ where: { username } });
+    return user ? user.toJSON() : null;
+  }
+
   // Bad practic, can't check type options
   async findAllUsers(options = {}) {
     const { search, limit, offset, order } = options;
-
     const where = {};
-
+  
     if (search) {
-      const value = search.trim();
+      const value = search.trim().toLowerCase();
+  
+      const genders = ['male', 'female', 'other'];
+      const matchedGender = genders.find(g => g.startsWith(value));
+  
+      const date = new Date(search.trim());
+      const isValidDate = !isNaN(date) && search.trim().match(/^\d{4}-\d{2}-\d{2}$/);
+  
       where[Op.or] = [
-        { username: { [Op.like]: `%${value}%` } },
-        { first_name: { [Op.like]: `%${value}%` } },
+        { username:  { [Op.like]: `%${value}%` } },
+        { first_name:{ [Op.like]: `%${value}%` } },
         { last_name: { [Op.like]: `%${value}%` } },
-        { gender: { [Op.like]: `%${value}%` } },
+        ...(matchedGender ? [{ gender: matchedGender }] : []),
+        ...(isValidDate   ? [{ birthdate: date }] : []),
       ];
     }
-
-    return await this.findAll({
-      limit,
-      offset,
-      order,
-      where,
-    });
+  
+    return await this.findAll({ limit, offset, order, where });
   }
 
   // Also can't check updates

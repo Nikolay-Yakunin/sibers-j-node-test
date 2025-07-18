@@ -70,9 +70,9 @@ class UserService {
 
   async updateUser(userId, updateData) {
     if (!userId) throw new Error('userId is required');
-    if (!updateData || typeof updateData !== 'object') {
-      throw new TypeError('Invalid updateData');
-    }
+    // if (!updateData || typeof updateData !== 'object') {
+    //   throw new TypeError('Invalid updateData');
+    // }
 
     const existing = await this.repo.findUserById(userId);
     if (!existing) throw new Error(`User with ID=${userId} not found`);

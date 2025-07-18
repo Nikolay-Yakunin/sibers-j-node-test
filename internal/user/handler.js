@@ -7,19 +7,19 @@ class UserHandler {
     this.service = userService;
   }
 
-  // GET /users?page=1&field='username'&sort='ASC'&gender='male'
+  // GET /users
   async getUsers({ query = {} }) {
     const { page = 1, sortby = 'username', sort = 'ASC', search = '' } = query;
-    return await this.service.getUsers({ page, sortby, sort, search });
+    return this.service.getUsers({ page, sortby, sort, search });
   }
 
-  // GET /users?id=1
+  // GET /users/:id
   async getUser({ params = {} }) {
     const { id } = params;
     if (!id) {
       throw createError(400, 'id is required');
     }
-    return await this.service.getUserById(Number(id));
+    return this.service.getUserById(Number(id));
   }
 
   // POST /users
@@ -53,27 +53,13 @@ class UserHandler {
     })
   }
 
-  // PUT /users 
-  async updateUser(body = {}) {
-    const {
-      username,
-      password,
-      first_name,
-      last_name,
-      gender,
-      birthdate
-    } = body;
-
-    // fields can be undefined
-
-    return this.service.updateUser({
-      username,
-      password,
-      first_name,
-      last_name,
-      gender,
-      birthdate
-    })
+  // PUT /users/:id
+  async updateUser({ params = {}, body = {} }) {
+    const { id } = params;
+    if (!id) {
+      throw createError(400, 'id is required');
+    }
+    return this.service.updateUser(Number(id), body);
   }
 
   // DELETE /users/:id
@@ -82,7 +68,7 @@ class UserHandler {
     if (!id) {
       throw createError(400, 'id is required');
     }
-    return await this.service.deleteUser(id);
+    return await this.service.deleteUser(Number(id));
   }
 
 }

@@ -7,7 +7,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/html:/usr/share/nginx/html:ro
+      - ./nginx/static:/usr/share/nginx/static:ro
     networks:
       - admin_dashboard
     restart: on-failure
