@@ -73,7 +73,6 @@ export async function showUser() {
   });
 }
 
-// Гарантируем, что showUser вызывается при переходе по url
 if (location.pathname === '/user') {
   document.addEventListener('DOMContentLoaded', showUser);
 }
